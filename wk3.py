@@ -64,3 +64,35 @@ def OverlapGraph(kmer_list):
 		
 	return overlap_list
 
+
+def HGraph(dictionary):
+	#i=dictionary.keys()[-1]  # start from 0 will enter infinite loop
+	k=0
+	while(k<len(dictionary.keys())):
+		break_flag=False
+		i=dictionary.keys()[k]
+		gph=[i]
+			
+		while(len(gph)<len(dictionary.keys())):
+			i=gph[-1]
+			tmp_ind=0
+			for j in dictionary[i]:
+				if j not in gph:
+					gph.append(j)
+					break
+				else: continue
+				tmp_ind+=1
+				if tmp_ind==len(dictionary[i]): 
+					break_flag=True
+					break
+		
+			if break_flag:
+				k+=1
+				break
+			
+			print tmp_ind, gph
+
+	return		
+
+
+# reload(wk3)
