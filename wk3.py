@@ -42,6 +42,9 @@ def ReadTextList(filename):
 	f.close()
 	return text_list
 
+# to generate kmer_list
+# kmer_list=[]
+# for i in range(0,16): kmer_list.append(bin[i][2:].zfill(4))
 
 def OverlapGraph(kmer_list):
 	K=len(kmer_list)
@@ -52,11 +55,12 @@ def OverlapGraph(kmer_list):
 		prefix[i]=kmer_list[i][0:-1]
 		suffix[i]=kmer_list[i][1:]
 
-	overlap_list=dict(zip(kmer_list,['']*K))
+	overlap_list=dict(zip(range(0,K),[0]*K))
 	for i in range(0, K):
-		overlap_list[kmer_list[i]]=list(overlap_list[kmer_list[i]])
+		overlap_list[i]=[]
 		for j in range(0, K):
 			if (prefix[j]==suffix[i]) & (j!=i):
-				overlap_list[kmer_list[i]].append(kmer_list[j])	
+				overlap_list[i].append(j)	
 		
 	return overlap_list
+
